@@ -67,3 +67,13 @@ if __name__ == '__main__':
         '../noisy_data/poisson',
         'poisson'
     )
+    generate_noisy_dataset(
+        '../datasets/train',
+        '../noisy_data/jpeg',
+        'jpeg'
+    )
+    generate_noisy_dataset(
+        '../datasets/train',
+        '../noisy_data/lowlight',
+        'lowlight'
+    )
