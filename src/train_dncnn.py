@@ -8,7 +8,6 @@ from torchvision import transforms
 from tqdm import tqdm
 from dncnn_model import DnCNN
 
-
 class DenoisingDataset(Dataset):
     def __init__(self, clean_dir, noisy_dir):
         self.clean_dir = clean_dir
