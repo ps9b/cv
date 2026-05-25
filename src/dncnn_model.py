@@ -2,16 +2,6 @@ import torch
 import torch.nn as nn
 from torchvision import transforms
 
-
-# =========================
-# Image Transform
-# =========================
-transform = transforms.Compose([
-    transforms.Resize((128, 128)),
-    transforms.ToTensor()
-])
-
-
 # =========================
 # DnCNN Model
 # =========================

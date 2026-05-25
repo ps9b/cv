@@ -4,15 +4,6 @@ from torchvision import transforms
 
 
 # =========================
-# Image Transform
-# =========================
-transform = transforms.Compose([
-    transforms.Resize((128, 128)),
-    transforms.ToTensor()
-])
-
-
-# =========================
 # Autoencoder Model
 # =========================
 class Autoencoder(nn.Module):
