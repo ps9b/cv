@@ -1,5 +1,17 @@
 import os
+import cv2
+import numpy as np
+import torch
+from torchvision import transforms
 
+try:
+    from skimage.metrics import peak_signal_noise_ratio as psnr
+    from skimage.metrics import structural_similarity as ssim
+except ImportError:
+    from skimage.measure import compare_psnr as psnr
+    from skimage.measure import compare_ssim as ssim
+
+from dncnn_model import DnCNN
 
 transform = transforms.ToTensor()
 
@@ -18,9 +30,11 @@ def evaluate_metrics(clean, output):
 
 def evaluate_dncnn(clean_dir, noisy_dir):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    model_path = os.path.join(script_dir, '..', 'models', 'dncnn.pth')
 
     model = DnCNN().to(device)
-    model.load_state_dict(torch.load('../models/dncnn.pth'))
+    model.load_state_dict(torch.load(model_path, map_location=device))
 
     model.eval()
 
@@ -53,7 +67,8 @@ def evaluate_dncnn(clean_dir, noisy_dir):
 
 
 if __name__ == '__main__':
+    script_dir = os.path.dirname(os.path.abspath(__file__))
     evaluate_dncnn(
-        '../datasets/test',
-        '../noisy_data/poisson'
+        os.path.join(script_dir, '..', 'datasets', 'test'),
+        os.path.join(script_dir, '..', 'noisy_data', 'poisson')
     )

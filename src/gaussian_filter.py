@@ -23,5 +23,13 @@ def gaussian_denoise(input_dir, output_dir, kernel_size=(5, 5)):
 if __name__ == '__main__':
     gaussian_denoise(
         '../noisy_data/poisson',
-        '../results/gaussian'
+        '../results/gaussian/poisson'
+    )
+    gaussian_denoise(
+        '../noisy_data/jpeg',
+        '../results/gaussian/jpeg'
+    )
+    gaussian_denoise(
+        '../noisy_data/lowlight',
+        '../results/gaussian/lowlight'
     )
