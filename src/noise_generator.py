@@ -63,17 +63,17 @@ def generate_noisy_dataset(input_dir, output_dir, noise_type):
 
 if __name__ == '__main__':
     generate_noisy_dataset(
-        '../datasets/train',
+        '../datasets/resized_images',
         '../noisy_data/poisson',
         'poisson'
     )
     generate_noisy_dataset(
-        '../datasets/train',
+        '../datasets/resized_images',
         '../noisy_data/jpeg',
         'jpeg'
     )
     generate_noisy_dataset(
-        '../datasets/train',
+        '../datasets/resized_images',
         '../noisy_data/lowlight',
         'lowlight'
     )
