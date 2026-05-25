@@ -1,28 +1,58 @@
 import torch
 import torch.nn as nn
+from torchvision import transforms
 
 
+# =========================
+# Image Transform
+# =========================
+transform = transforms.Compose([
+    transforms.Resize((128, 128)),
+    transforms.ToTensor()
+])
+
+
+# =========================
+# DnCNN Model
+# =========================
 class DnCNN(nn.Module):
-    def __init__(self, depth=17, channels=64, image_channels=3):
+    def __init__(self, depth=17, channels=64):
         super(DnCNN, self).__init__()
 
         layers = []
 
+        # First Layer
         layers.append(
-            nn.Conv2d(image_channels, channels, 3, padding=1)
+            nn.Conv2d(
+                3,
+                channels,
+                kernel_size=3,
+                padding=1
+            )
         )
-
         layers.append(nn.ReLU(inplace=True))
 
+        # Middle Layers
         for _ in range(depth - 2):
             layers.append(
-                nn.Conv2d(channels, channels, 3, padding=1)
+                nn.Conv2d(
+                    channels,
+                    channels,
+                    kernel_size=3,
+                    padding=1
+                )
             )
             layers.append(nn.BatchNorm2d(channels))
             layers.append(nn.ReLU(inplace=True))
 
+        # Last Layer
         layers.append(
-            nn.Conv2d(channels, image_channels, 3, padding=1)
+            nn.Conv2d(
+                channels,
+                3,
+                kernel_size=3,
+                padding=1
+            )
         )
 
         self.dncnn = nn.Sequential(*layers)
